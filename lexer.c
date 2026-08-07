@@ -70,9 +70,13 @@ void lexer(tok **head, tok **tail, FILE *fp)
             }
             ungetc(ch, fp);
         }
-        else if (strchr("+-*/%=!<>&|^?:(){}[];,.'#", ch))
+        else if (strchr("+-*/%=!<>&|^?:", ch))
         {
-            scan_operator(head,tail,fp,ch);
+            scan_operator(head, tail, fp, ch);
+        }
+        else if (strchr("(){}[];,.", ch))
+        {
+            special_symbols(head,tail,ch);
         }
     }
 }

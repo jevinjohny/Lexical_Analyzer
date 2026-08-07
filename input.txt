@@ -1,17 +1,11 @@
 int main()
 {
-    int a;
-    int b;
+    int a,b;
 
-    a % b;
+    a = 10;
 
-    a++;
-    b--;
-
-    a && b;
-    a || b;
-
-    !a;
-
-    result = (a > b) ? a : b;
+    if(a > 5)
+    {
+        a++;
+    }
 }

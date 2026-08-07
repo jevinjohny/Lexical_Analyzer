@@ -20,7 +20,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -32,7 +32,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -44,7 +44,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -56,7 +56,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -68,7 +68,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -80,7 +80,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -92,7 +92,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
@@ -104,15 +104,14 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         }
         else
         {
-            ungetc(next,fp);
+            ungetc(next, fp);
         }
         break;
     }
     default:
     {
-        ungetc(next,fp);
+        ungetc(next, fp);
     }
-
     }
     add_token(head, tail, buffer, "OPERATOR");
 

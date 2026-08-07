@@ -19,5 +19,6 @@ int print_token(tok *head);
 int keywordcheck(char *str);
 void lexer(tok **head, tok **tail, FILE *fp);
 int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara);
+void special_symbols(tok **head, tok **tail, char first_chara);
 
 #endif
