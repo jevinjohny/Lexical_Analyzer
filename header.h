@@ -14,6 +14,7 @@ typedef struct token
     struct token *next;
 } tok;
 
+void scan_preprocessor(tok **head, tok **tail, FILE *fp, int *line_no);
 int add_token(tok **head, tok **tail, char *lex, char *type, int line_no);
 int print_token(tok *head);
 int keywordcheck(char *str);

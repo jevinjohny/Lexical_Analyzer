@@ -20,7 +20,15 @@ void lexer(tok **head, tok **tail, FILE *fp)
 
     while ((ch = fgetc(fp)) != EOF)
     {
-        if (ch == '\n')
+        if (ch == '\r')
+        {
+            continue;
+        }
+        else if (ch == '#')
+        {
+            scan_preprocessor(head, tail, fp, &line_no);
+        }
+        else if (ch == '\n')
         {
             line_no++;
         }
@@ -31,7 +39,10 @@ void lexer(tok **head, tok **tail, FILE *fp)
 
             while (isalnum(ch))
             {
-                buffer[index++] = ch;
+                if (ch != '\r')
+                {
+                    buffer[index++] = ch;
+                }
 
                 ch = fgetc(fp);
             }
@@ -48,8 +59,6 @@ void lexer(tok **head, tok **tail, FILE *fp)
             }
 
             ungetc(ch, fp); // puts back the unwanted character at last
-
-            printf("%s\n", buffer);
         }
         else if (isdigit(ch)) // might be number or constant
         {
@@ -63,7 +72,10 @@ void lexer(tok **head, tok **tail, FILE *fp)
                 {
                     dot++; // counts the no of dot
                 }
-                buffer[index++] = ch;
+                if (ch != '\r')
+                {
+                    buffer[index++] = ch;
+                }
 
                 ch = fgetc(fp);
             }
