@@ -1,4 +1,12 @@
 int main()
 {
-    printf("Hello World");
+    // this is a comment
+    int a = 10;
+
+    /*
+       multi line
+       comment
+    */
+
+    a++;
 }

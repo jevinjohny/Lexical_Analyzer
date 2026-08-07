@@ -78,6 +78,10 @@ void lexer(tok **head, tok **tail, FILE *fp)
         {
             scan_string_literal(head, tail, fp);
         }
+        else if (ch == '/')
+        {
+            skip_comment(fp);
+        }
         else if (strchr("+-*/%=!<>&|^?:", ch))
         {
             scan_operator(head, tail, fp, ch);
