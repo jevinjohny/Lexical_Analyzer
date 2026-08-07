@@ -1,19 +1,17 @@
-#include <stdio.h>
-
 int main()
 {
-    int count;
-    float speed;
-    char grade;
+    int a;
+    int b;
 
-    count = 10;
-    speed = 25.5;
-    grade = 'A';
+    a % b;
 
-    if(count > 0)
-    {
-        return count;
-    }
+    a++;
+    b--;
 
-    return 0;
+    a && b;
+    a || b;
+
+    !a;
+
+    result = (a > b) ? a : b;
 }

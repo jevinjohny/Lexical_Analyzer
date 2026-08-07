@@ -70,5 +70,9 @@ void lexer(tok **head, tok **tail, FILE *fp)
             }
             ungetc(ch, fp);
         }
+        else if (strchr("+-*/%=!<>&|^?:(){}[];,.'#", ch))
+        {
+            scan_operator(head,tail,fp,ch);
+        }
     }
 }
