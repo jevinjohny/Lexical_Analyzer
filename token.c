@@ -1,6 +1,6 @@
 #include "header.h"
 
-int add_token(tok **head, tok **tail, char *lex, char *type)
+int add_token(tok **head, tok **tail, char *lex, char *type, int line_no)
 {
     tok *new = malloc(sizeof(tok));
 
@@ -13,7 +13,7 @@ int add_token(tok **head, tok **tail, char *lex, char *type)
     strcpy(new->lex, lex);
     strcpy(new->type, type);
 
-    // new->line_no = line_no;
+    new->line_no = line_no;
     new->next = NULL;
 
     if (*head == NULL)
@@ -42,7 +42,7 @@ int print_token(tok *head)
 
     while (temp)
     {
-        printf("Token type:%s, Token:%s\n", temp->type, temp->lex);
+        printf("Token type:%s, Token:%s, Line no %d\n", temp->type, temp->lex, temp->line_no);
         temp = temp->next;
     }
 

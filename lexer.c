@@ -15,11 +15,16 @@ int keywordcheck(char *str)
 
 void lexer(tok **head, tok **tail, FILE *fp)
 {
+    int line_no = 1;
     char ch;
 
     while ((ch = fgetc(fp)) != EOF)
     {
-        if (isalpha(ch)) // it might be a word
+        if (ch == '\n')
+        {
+            line_no++;
+        }
+        else if (isalpha(ch)) // it might be a word
         {
             char buffer[50];
             int index = 0;
@@ -35,11 +40,11 @@ void lexer(tok **head, tok **tail, FILE *fp)
 
             if (keywordcheck(buffer))
             {
-                add_token(head, tail, buffer, "KEYWORD");
+                add_token(head, tail, buffer, "KEYWORD", line_no);
             }
             else
             {
-                add_token(head, tail, buffer, "IDENTIFIER");
+                add_token(head, tail, buffer, "IDENTIFIER", line_no);
             }
 
             ungetc(ch, fp); // puts back the unwanted character at last
@@ -66,29 +71,29 @@ void lexer(tok **head, tok **tail, FILE *fp)
 
             if (dot <= 1) // if dot is more than 1 it is not a constant
             {
-                add_token(head, tail, buffer, "CONSTANT");
+                add_token(head, tail, buffer, "CONSTANT", line_no);
             }
             ungetc(ch, fp);
         }
         else if (ch == '\'')
         {
-            scan_char_constant(head, tail, fp);
+            scan_char_constant(head, tail, fp, line_no);
         }
         else if (ch == '"')
         {
-            scan_string_literal(head, tail, fp);
+            scan_string_literal(head, tail, fp, line_no);
         }
         else if (ch == '/')
         {
-            skip_comment(fp);
+            skip_comment(fp, &line_no);
         }
         else if (strchr("+-*/%=!<>&|^?:", ch))
         {
-            scan_operator(head, tail, fp, ch);
+            scan_operator(head, tail, fp, ch, line_no);
         }
         else if (strchr("(){}[];,.", ch))
         {
-            special_symbols(head, tail, ch);
+            special_symbols(head, tail, ch, line_no);
         }
     }
 }

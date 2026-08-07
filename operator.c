@@ -1,5 +1,5 @@
 #include "header.h"
-int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
+int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara, int line_no)
 {
     char buffer[3]; // max 2 character operator
 
@@ -113,7 +113,7 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara)
         ungetc(next, fp);
     }
     }
-    add_token(head, tail, buffer, "OPERATOR");
+    add_token(head, tail, buffer, "OPERATOR", line_no);
 
     return 1;
 }

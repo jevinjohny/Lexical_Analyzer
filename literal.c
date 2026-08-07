@@ -1,6 +1,6 @@
 #include "header.h"
 
-void scan_char_constant(tok **head, tok **tail, FILE *fp)
+void scan_char_constant(tok **head, tok **tail, FILE *fp, int line_no)
 {
     char buffer[4];
 
@@ -22,11 +22,11 @@ void scan_char_constant(tok **head, tok **tail, FILE *fp)
     {
         buffer[index++] = ch;
         buffer[index] = '\0';
-        add_token(head, tail, buffer, "CHAR_CONSTANT");
+        add_token(head, tail, buffer, "CHAR_CONSTANT", line_no);
     }
 }
 
-void scan_string_literal(tok **head, tok **tail, FILE *fp)
+void scan_string_literal(tok **head, tok **tail, FILE *fp, int line_no)
 {
     char buffer[50];
 
@@ -44,6 +44,6 @@ void scan_string_literal(tok **head, tok **tail, FILE *fp)
     {
         buffer[index++] = ch;
         buffer[index] = '\0';
-        add_token(head, tail, buffer, "STRING_LITERAL");
+        add_token(head, tail, buffer, "STRING_LITERAL", line_no);
     }
 }

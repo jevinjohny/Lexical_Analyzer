@@ -1,12 +1,33 @@
+#include <stdio.h>
+
 int main()
 {
-    // this is a comment
-    int a = 10;
+    // Variable declarations
+    int count = 10;
+    float speed = 25.5;
+    char grade = 'A';
 
     /*
-       multi line
-       comment
+       Multi-line comment
+       should be ignored by lexer
     */
 
-    a++;
+    count++;
+    speed--;
+
+    if(count >= 10 && speed != 0)
+    {
+        printf("Vehicle speed is high");
+
+        count = count + 5;
+    }
+    else
+    {
+        count = 0;
+    }
+
+    int result;
+    result = (count > 10) ? count : 0;
+
+    return 0;
 }
