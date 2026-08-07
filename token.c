@@ -30,8 +30,7 @@ int add_token(tok **head, tok **tail, char *lex, char *type, int line_no)
     return 1;
 }
 
-int 
-print_token(tok *head)
+int print_token(tok *head)
 {
     if (head == NULL)
     {
