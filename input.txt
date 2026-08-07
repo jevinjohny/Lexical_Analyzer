@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main()
+{
+    int count;
+    float speed;
+    char grade;
+
+    count = 10;
+    speed = 25.5;
+    grade = 'A';
+
+    if(count > 0)
+    {
+        return count;
+    }
+
+    return 0;
+}
