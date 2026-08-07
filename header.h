@@ -17,5 +17,6 @@ typedef struct token
 int add_token(tok **head, tok **tail, char *lex, char *type);
 int print_token(tok *head);
 int keywordcheck(char *str);
+void lexer(tok **head, tok **tail, FILE *fp);
 
 #endif
