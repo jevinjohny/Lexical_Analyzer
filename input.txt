@@ -1,6 +1,4 @@
 int main()
 {
-    char grade;
-
-    grade = 'A';
+    printf("Hello World");
 }
