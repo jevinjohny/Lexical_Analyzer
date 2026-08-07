@@ -1,0 +1,30 @@
+#include "header.h"
+
+void scan_char_constant(tok **head, tok **tail, FILE *fp)
+{
+    char buffer[4];
+
+    int index = 0;
+
+    buffer[index++] = '\'';
+    
+    char ch = fgetc(fp);
+    
+    if (ch==EOF)
+    {
+        return;
+    }
+    
+    buffer[index++] = ch;
+
+    ch = fgetc(fp);
+    if (ch == '\'')
+    {
+        buffer[index++] = ch;
+        buffer[index] = '\0';
+        add_token(head, tail, buffer, "CHAR_CONSTANT");
+    }
+}
+// void scan_string_literal(tok **head, tok **tail, FILE *fp)
+// {
+// }

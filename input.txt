@@ -1,11 +1,6 @@
 int main()
 {
-    int a,b;
+    char grade;
 
-    a = 10;
-
-    if(a > 5)
-    {
-        a++;
-    }
+    grade = 'A';
 }

@@ -70,13 +70,17 @@ void lexer(tok **head, tok **tail, FILE *fp)
             }
             ungetc(ch, fp);
         }
+        else if (ch == '\'')
+        {
+            scan_char_constant(head, tail, fp);
+        }
         else if (strchr("+-*/%=!<>&|^?:", ch))
         {
             scan_operator(head, tail, fp, ch);
         }
         else if (strchr("(){}[];,.", ch))
         {
-            special_symbols(head,tail,ch);
+            special_symbols(head, tail, ch);
         }
     }
 }

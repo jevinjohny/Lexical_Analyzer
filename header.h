@@ -20,5 +20,7 @@ int keywordcheck(char *str);
 void lexer(tok **head, tok **tail, FILE *fp);
 int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara);
 void special_symbols(tok **head, tok **tail, char first_chara);
+void scan_char_constant(tok **head, tok **tail, FILE *fp);
+void scan_string_literal(tok **head, tok **tail, FILE *fp);
 
 #endif
