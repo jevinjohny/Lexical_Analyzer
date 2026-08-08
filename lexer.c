@@ -79,25 +79,50 @@ void lexer(tok **head, tok **tail, FILE *fp)
 
                 ch = fgetc(fp);
             }
-            buffer[index] = '\0';
-
-            if (dot <= 1) // if dot is more than 1 it is not a constant
+            if (isalnum(ch) || ch == '_') // error checking
             {
-                add_token(head, tail, buffer, "CONSTANT", line_no);
+                while (isalnum(ch) || ch == '_')
+                {
+                    if (ch != '\r')
+                    {
+                        buffer[index++] = ch;
+                    }
+                    ch = fgetc(fp);
+                }
+                buffer[index] = '\0';
+
+                add_token(head, tail, buffer, "ERROR", line_no);
+                ungetc(ch, fp);
             }
-            ungetc(ch, fp);
+            else
+            {
+                buffer[index] = '\0';
+
+                if (dot <= 1) // if dot is more than 1 it is not a constant
+                {
+                    add_token(head, tail, buffer, "CONSTANT", line_no);
+                }
+                else
+                {
+                    add_token(head, tail, buffer, "ERROR", line_no);
+                }
+                ungetc(ch, fp);
+            }
         }
         else if (ch == '\'')
         {
-            scan_char_constant(head, tail, fp, line_no);
+            scan_char_constant(head, tail, fp, &line_no);
         }
         else if (ch == '"')
         {
-            scan_string_literal(head, tail, fp, line_no);
+            scan_string_literal(head, tail, fp, &line_no);
         }
         else if (ch == '/')
         {
-            skip_comment(fp, &line_no);
+            if (!skip_comment(fp, &line_no))
+            {
+                scan_operator(head, tail, fp, ch, line_no);
+            }
         }
         else if (strchr("+-*/%=!<>&|^?:", ch))
         {
@@ -106,6 +131,21 @@ void lexer(tok **head, tok **tail, FILE *fp)
         else if (strchr("(){}[];,.", ch))
         {
             special_symbols(head, tail, ch, line_no);
+        }
+        else if (ch == '\n')
+        {
+            line_no++;
+        }
+        else // for unknown sysmbols error
+        {
+            if (ch == ' ')
+            {
+                continue;
+            }
+            char buffer[2];
+            buffer[0] = ch;
+            buffer[1] = '\0';
+            add_token(head, tail, buffer, "ERROR", line_no);
         }
     }
 }

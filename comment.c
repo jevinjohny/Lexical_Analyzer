@@ -1,6 +1,6 @@
 #include "header.h"
 
-void skip_comment(FILE *fp, int *line_no)
+int skip_comment(FILE *fp, int *line_no)
 {
     char next = fgetc(fp);
 
@@ -10,6 +10,7 @@ void skip_comment(FILE *fp, int *line_no)
         while ((ch = fgetc(fp)) != '\n' && ch != EOF)
             ;
         (*line_no)++;
+        return 1;
     }
     else if (next == '*')
     {
@@ -28,5 +29,8 @@ void skip_comment(FILE *fp, int *line_no)
             }
             prev = ch;
         }
+        return 1;
     }
+    ungetc(next,fp);
+    return 0;
 }

@@ -62,9 +62,9 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara, int line_n
     }
     case '+':
     {
-        if (next == '+')
+        if (next == '+' || next == '=')
         {
-            buffer[1] = '+';
+            buffer[1] = next;
         }
         else
         {
@@ -74,9 +74,9 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara, int line_n
     }
     case '-':
     {
-        if (next == '-')
+        if (next == '-' || next == '=')
         {
-            buffer[1] = '-';
+            buffer[1] = next;
         }
         else
         {
@@ -101,6 +101,42 @@ int scan_operator(tok **head, tok **tail, FILE *fp, char first_chara, int line_n
         if (next == '|')
         {
             buffer[1] = '|';
+        }
+        else
+        {
+            ungetc(next, fp);
+        }
+        break;
+    }
+    case '*':
+    {
+        if (next == '=')
+        {
+            buffer[1] = next;
+        }
+        else
+        {
+            ungetc(next, fp);
+        }
+        break;
+    }
+    case '/':
+    {
+        if (next == '=')
+        {
+            buffer[1] = next;
+        }
+        else
+        {
+            ungetc(next, fp);
+        }
+        break;
+    }
+    case '%':
+    {
+        if (next == '=')
+        {
+            buffer[1] = next;
         }
         else
         {
