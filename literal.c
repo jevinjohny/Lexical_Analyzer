@@ -10,9 +10,9 @@ void scan_char_constant(tok **head, tok **tail, FILE *fp, int *line_no)
 
     char ch = fgetc(fp);
 
-    if (ch == EOF || ch=='\n')
+    if (ch == EOF || ch == '\n')
     {
-        if (ch=='\n')
+        if (ch == '\n')
         {
             (*line_no)++;
         }
@@ -21,7 +21,25 @@ void scan_char_constant(tok **head, tok **tail, FILE *fp, int *line_no)
         return;
     }
 
-    if (ch != '\r')
+    if (ch == '\\')
+    {
+        buffer[index++] = ch;
+
+        ch = fgetc(fp);
+
+        if (ch == 'n' || ch == 't' || ch == 'r')
+        {
+            buffer[index++] = ch;
+        }
+        else
+        {
+            buffer[index++] = ch;
+            buffer[index] = '\0';
+            add_token(head, tail, buffer, "ERROR", *line_no);
+            return;
+        }
+    }
+    else
     {
         buffer[index++] = ch;
     }
@@ -52,27 +70,40 @@ void scan_string_literal(tok **head, tok **tail, FILE *fp, int *line_no)
     buffer[index++] = '"';
 
     char ch;
-    while ((ch = fgetc(fp)) != '"' && ch != '\n' && ch != EOF)
+    while ((ch = fgetc(fp)) != EOF)
     {
-        if (ch != '\r')
+        if (ch == '\r')
+        {
+            continue;
+        }
+        if(ch=='\\')//in between escaape sequence
         {
             buffer[index++] = ch;
+            ch = fgetc(fp);
+            
+            if (ch==EOF)
+            {
+                break;
+            }
+            buffer[index++] = ch;
+            continue;
+            
         }
-    }
-
-    if (ch == '"')
-    {
-        buffer[index++] = ch;
-        buffer[index] = '\0';
-        add_token(head, tail, buffer, "STRING_LITERAL", *line_no);
-    }
-    else
-    {
-        buffer[index] = '\0';
-        add_token(head, tail, buffer, "ERROR", *line_no);
-        if (ch=='\n')
+        if (ch == '"')
+        {
+            buffer[index++] = ch;
+            buffer[index] = '\0';
+            add_token(head, tail, buffer, "STRING_LITERAL", *line_no);
+            return;
+        }
+        if (ch == '\n')
         {
             (*line_no)++;
+            break;
         }
+        buffer[index++] = ch;
     }
+
+    buffer[index] = '\0';
+    add_token(head, tail, buffer, "ERROR", *line_no);
 }

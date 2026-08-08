@@ -1,6 +1,48 @@
-int count_1;
-int _speed;
-int value123;
+if (strcmp("KEYWORD", temp->type) == 0)
+        {
+           KEYWORD ++;
+        }
+        else if (strcmp("IDENTIFIER", temp->type) == 0)
+        {
+            IDENTIFIER++;
+        }
+        else if (strcmp("CONSTANT", temp->type) == 0)
+        {
+            CONSTANT++;
+        }
+        else if (strcmp("CHAR_CONSTANT", temp->type) == 0)
+        {
+            CHAR_CONSTANT++;
+        }
+        else if (strcmp("STRING_LITERAL", temp->type) == 0)
+        {
+            STRING_LITERAL++;
+        }
+        else if (strcmp("OPERATOR", temp->type) == 0)
+        {
+            OPERATOR++;
+        }
+        else if (strcmp("SPECIAL_SYMBOL", temp->type) == 0)
+        {
+            SPECIAL_SYMBOL++;
+        }
+        else if (strcmp("PREPROCESSOR_DIRECTIVE", temp->type) == 0)
+        {
+            PREPROCESSOR_DIRECTIVE++;
+        }
+        else if (strcmp("ERROR", temp->type) == 0)
+        {
+            ERROR++;
+        }
+        total++;
 
-abc123;
-123abc;
+        int total = 0;
+    int KEYWORD = 0;
+    int IDENTIFIER = 0;
+    int CONSTANT = 0;
+    int CHAR_CONSTANT = 0;
+    int STRING_LITERAL = 0;
+    int OPERATOR = 0;
+    int SPECIAL_SYMBOL = 0;
+    int PREPROCESSOR_DIRECTIVE = 0;
+    int ERROR = 0;
