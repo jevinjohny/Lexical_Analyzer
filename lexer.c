@@ -32,12 +32,12 @@ void lexer(tok **head, tok **tail, FILE *fp)
         {
             line_no++;
         }
-        else if (isalpha(ch)) // it might be a word
+        else if (isalpha(ch) || ch == '_') // it might be a word
         {
             char buffer[50];
             int index = 0;
 
-            while (isalnum(ch))
+            while (isalnum(ch) || ch == '_')
             {
                 if (ch != '\r')
                 {

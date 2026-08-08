@@ -1,11 +1,6 @@
-a /= 10;
+int count_1;
+int _speed;
+int value123;
 
-// this is a comment
-a++;
-
-/*
-   multi-line
-   comment
-*/
-
-a /= 5;
+abc123;
+123abc;
